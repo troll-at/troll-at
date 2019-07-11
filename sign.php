@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V2</title>
+	<title>Sign</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -71,7 +71,7 @@
 							 have an account?
 						</span>
 
-						<a class="txt2" href="index.php">
+						<a class="txt2" href="login.php">
 							Login 
 						</a>
 					</div>
@@ -99,6 +99,15 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script type="text/javascript">
+		$('input.input100').keydown(function(e) {
 
+        // alert (e.keyCode);
+
+	if (e.keyCode == 32) {
+		return false;
+	}
+});
+	</script>
 </body>
 </html>

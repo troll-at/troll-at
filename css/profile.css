@@ -1,0 +1,132 @@
+*, html,body{
+	margin:0;
+}
+#troll-at-navbar{
+	background-color:#1df922;
+	color:white;
+	font-family:arial;
+	font-size: 25px;
+	height:25px;
+	padding-top:15px;
+	padding-left:80px;
+	padding-bottom:16px;
+}
+#troll-at-navbar > input {
+	height:20px;
+	margin-left:200px;
+	width:300px;
+	padding-left:10px;
+}
+#options > a {
+	text-decoration-line:none;
+	color:#e5e5e5;
+	margin-left:20px;
+}
+#options > a:hover {
+	text-decoration-line:none;
+	color:white;
+	margin-left:20px;
+}
+#options>input{
+	height:20px;
+	margin-left:120px;
+	width:200px;
+	padding-left:10px;
+	
+}
+#profile-img{
+	width:150px;
+	height:150px;
+	border-radius:50%;
+	border:white 2px solid;
+}
+.imgs{
+	background-image:url(images/index.jpg);
+	background-repeat:no-repeat;
+	width:100%;
+	background-size:100% 270px;
+	height:170px;
+	padding-top:170px;
+	background-color:#d6d6d6;
+	padding-left:30px;
+}
+.imgs > span{
+	position:absolute;
+	top:280px;
+	color:white;
+	font-size:30px;
+	left:200px;
+}
+
+.imgs>a>#home{
+	position:absolute;
+	top:306px;
+	margin-left:20px;
+	color:black;
+	font-size:20px;
+	width:80px;
+	margin-top:20px;
+	margin-left:300px;
+	border:#d6d6d6 1px solid;
+	border-bottom:green 3px solid;
+	height:69px;
+}
+.imgs>a>#other{
+	position:absolute;
+	top:306px;
+	margin-left:0px;
+	color:black;
+	font-size:20px;
+	width:140px;
+	margin-top:20px;
+	margin-left:300px;
+	border:#d6d6d6 1px solid;
+	height:69px;
+}
+.imgs>a>#followers{
+	position:absolute;
+	top:306px;
+	color:black;
+	font-size:20px;
+	width:120px;
+	margin-top:20px;
+	margin-left:300px;
+	border:#d6d6d6 1px solid;
+	height:69px;
+}
+#troll{
+	width:600px;
+	background-color:#eaffed;
+	margin-left:340px;
+	margin-top:60px;
+}
+#posted-troll{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	border:white 2px solid;
+}
+#the-troll{
+	width:100%;
+	height:600px;
+}
+#troll>span{
+	position:absolute;
+	top:472px;
+	padding-left:10px;
+	font-size:20px;
+}
+#troll-option{
+	height:64px;
+	padding-left:75%;
+}
+#like{
+	height:32px;
+	padding-top:20px;
+	padding-left:40%;
+}
+#dislike{
+	height:32px;
+	padding-top:20px;
+	padding-left:10%;
+}

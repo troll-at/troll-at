@@ -2,10 +2,7 @@
 session_start();
 error_reporting(E_ERROR | E_PARSE);
  $connection = mysqli_connect("127.0.0.1", "root", "", "trollat-login-signin");
-if (isset($_SESSION['username'])) {
-	header('Location: user-profile.php');
 
-}
 //3. If the form is submitted or not.
 //3.1 If the form is submitted
 if (isset($_POST['username']) and isset($_POST['password'])){
@@ -21,6 +18,7 @@ $count = mysqli_num_rows($result);
 if ($count > 0){
 $_SESSION['username'] = $username;
 $_SESSION['password'] = $password;
+$_SESSION['id5024041245'] = "hello";
 header('Location: user-profile.php');
 
 }else{

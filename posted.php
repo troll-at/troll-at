@@ -18,24 +18,36 @@ if (!empty($_SESSION['username'])) {
 <body style="background:#ff7700">
 <body>
 
+<?php
+$tif=$_SESSION['username'];
+$lak = mysqli_connect("127.0.0.1", "root", "", $tif);
+$qary="SELECT count(username) AS total FROM `followers`";
+$rsult=mysqli_query($lak, $qary);
+$vales=mysqli_fetch_assoc($rsult);
+$num_rws=$vales['total'];
+?>
+<?php
+$tiaf=$_SESSION['username'];
+$liak = mysqli_connect("127.0.0.1", "root", "", $tiaf);
+$qaery="SELECT count(username) AS total FROM `following`";
+$reslts=mysqli_query($liak, $qaery);
+$valu=mysqli_fetch_assoc($reslts);
+$num_ro=$valu['total'];
+?>
 <div class="topnav" id="myTopnav">
   <a id="trol" href="">TROLL-AT</a>
-  <a href="">followers
-  <a href="#about">following</a>
+  <a href="user-profile.php">Home</a>
+  <a href="user-followers.php">followers &nbsp<?php echo $num_rws; ?></a>
+  <a href="user-following.php">following &nbsp<?php echo $num_ro; ?></a>
   <a href="search.php">Search</a>
   <a href="post.php">Post</a>
-  <a href="">Settings</a> <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+  <a href="settings.php">Settings</a> 
+  <a href="deconexion.php">Logout</a><a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>
 </div>
-
 <div class="topnave" id="Topnav">
-<form action="posted.php" method="post" enctype="multipart/form-data">
-    <div align="center">
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input  type="submit" value="Upload Image" name="submit">
 </div>
-</form></div>
 <script>
 function myFunction() {
   var x = document.getElementById("myTopnav");
@@ -49,54 +61,62 @@ function myFunction() {
 </body>
 </html>
 <?php
-session_start();
-$username = $_SESSION['username'];
-$dbconn=mysqli_connect("127.0.0.1", "root", "", $username);
-$target_dir = "$username\ ";
-$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-$rand = rand(000,100000000000);
 
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        $uploadOk = 1;
-    } else {
-        
+// Upload and Rename File
+
+if (isset($_POST['submit']))
+{
+  
+  $filename = $_FILES["file"]["name"];
+  $file_basename = substr($filename, 0, strripos($filename, '.')); // get file extention
+  $file_ext = substr($filename, strripos($filename, '.')); // get file name
+  $filesize = $_FILES["file"]["size"];
+  $allowed_file_types = array('.jpg','.jpeg','.png','.gif');  
+  $newfilename = md5($file_basename) . $file_ext;
+  $user=$_SESSION['username'];
+   $tar=$user.$newfilename;
+  $dbconn = mysqli_connect("127.0.0.1", "root", "", $user);
+  if (in_array($file_ext,$allowed_file_types) && ($filesize < 200000))
+  { 
+    // Rename file
+    $newfilename = md5($file_basename) . $file_ext;
+    if (file_exists($user. $newfilename))
+    {
+      // file already exists error
+      echo "You have already uploaded this file.";
     }
-}
-// Check if file already exists
-// Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $uploadOk = 0;
-}
-// Allow certain file formats
-if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-&& $imageFileType != "gif" ) {
-    echo "<div style='color:white;margin-top:100px;' align='center'><h1>Sorry, only JPG, JPEG, PNG & GIF files are allowed.</h1></div>";
-    $uploadOk = 0;
-}
-// Check if $uploadOk is set to 0 by an error
-if ($uploadOk == 0) {
-    echo "<div style='color:white;margin-top:100px;' align='center'><h1>Sorry, your file was not uploaded.</h1></div>";
-// if everything is ok, try to upload file
-} else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    	$lin=basename( $_FILES["fileToUpload"]["name"]);
-        $line=$username."/".$lin;
-    	$mysql="INSERT INTO $username (images) VALUES ('$line')";
-    	if (mysqli_query($dbconn, $mysql)) {
-    		echo "
+    else
+    {   
+      $tar=$user."/".$newfilename;
+      move_uploaded_file($_FILES["file"]["tmp_name"], $tar);     
+      $mysql="INSERT INTO $user (images) VALUES ('$tar')";
+      if (mysqli_query($dbconn, $mysql)) {
+        echo "
     <div style='color:white;margin-top:100px;' align='center'><h1>Your photo has been uploaded</h1><a href='user-profile.php'><button style='backgound-color:green;font-size:25px;text-decoration:none;color:white;background-color:red;border:solid 1px red;'>go to your profile</button></a></div>";
 
-    	} else {
+      } else {
         echo "
 
     <div style='color:white;margin-top:100px;' align='center'><h1>Sorry, there was a problem</h1></div>
 ";
     }
-}}
+    }
+  }
+  elseif (empty($file_basename))
+  { 
+    // file selection error
+    echo "Please select a file to upload.";
+  } 
+  elseif ($filesize > 200000)
+  { 
+    // file size error
+    echo "The file you are trying to upload is too large.";
+  }
+  else
+  {
+    // file type error
+    echo "Only these file typs are allowed for upload: " . implode(', ',$allowed_file_types);
+    unlink($_FILES["file"]["tmp_name"]);
+  }
+}
 ?>

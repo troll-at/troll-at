@@ -8,7 +8,7 @@ include("server.php");
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/icon" href="images/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -57,7 +57,7 @@ include("server.php");
 					</div>
 				<?php
 					
-					if ($count == 1){
+					if ($count === 0){
 					echo "<div style='color:red' align='center'>ERROR in username or password! Please try again</div>";
 					}
 					

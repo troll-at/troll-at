@@ -1,11 +1,10 @@
-<?php 
+<?php  
 include("server.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V2</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,10 +30,10 @@ include("server.php");
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
-<body >
+<body>
 	
-	<div  class="limiter">
-		<div style="background-color:yellow;" class="container-login100">
+	<div class="limiter" style="background-color:orange;">
+		<div class="container-login100" style="background-color:orange;">
 			<div class="wrap-login100">
 				<form method="post" class="login100-form validate-form" >
 					<span class="login100-form-title p-b-26">
@@ -45,7 +44,7 @@ include("server.php");
 					</span>
 
 					<div class="wrap-input100 validate-input">
-						<input id="username" class="input100" type="text" name="username">
+						<input class="input100" type="text" name="username">
 						<span class="focus-input100" data-placeholder="Username"></span>
 					</div>
 				
@@ -56,7 +55,13 @@ include("server.php");
 						<input class="input100" type="password" name="password">
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
-				<script type="text/javascript" src="troll-at.js"></script>
+				<?php
+					
+					if ($count == 1){
+					echo "<div style='color:red' align='center'>ERROR in username or password! Please try again</div>";
+					}
+					
+					  ?>
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
